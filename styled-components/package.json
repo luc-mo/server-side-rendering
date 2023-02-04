@@ -1,0 +1,33 @@
+{
+  "name": "styled-components-ssr",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node dist/server.js",
+    "dev": "vite --open",
+    "build": "yarn build:client && yarn build:server && yarn correct:marks && yarn correct:links",
+    "build:client": "tsc && vite build --outDir dist",
+    "build:server": "tsc && vite build --ssr src/entry-server.tsx --outDir dist",
+    "correct:marks": "sed -i \"s/\\\"/'/g\" dist/index.html",
+    "correct:links": "sed -i \"s/='\\//='dist\\//g\" dist/index.html",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/styled-components": "^5.1.26",
+    "@vitejs/plugin-react": "^3.1.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0"
+  }
+}
